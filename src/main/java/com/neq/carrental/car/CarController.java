@@ -3,7 +3,9 @@ package com.neq.carrental.car;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,14 +19,21 @@ public class CarController {
 	@Autowired
 	private CarRepository carRepository;
 
+	List<Car> cars;
+
 	@PostMapping(path = "/add")
-	public @ResponseBody String addCar(@RequestParam String type, @RequestParam String brand,
-			@RequestParam String model, @RequestParam int price) {
+	public @ResponseBody String addCar(@RequestParam int officeId, @RequestParam String type,
+			@RequestParam String brand, @RequestParam String model, @RequestParam int price, @RequestParam short year,
+			@RequestParam short horsepower, @RequestParam byte seats) {
 
 		Car c = new Car();
-		c.setCar_type(type);
+		c.setOffice_id(officeId);
+		c.setCarType(type);
 		c.setBrand(brand);
 		c.setModel(model);
+		c.setProduction_year(year);
+		c.setHorsepower(horsepower);
+		c.setSeats(seats);
 		c.setPrice(price);
 
 		carRepository.save(c);
@@ -33,31 +42,58 @@ public class CarController {
 	}
 
 	@GetMapping(path = "/get")
-	public @ResponseBody Iterable<Car> getAllCars() {
-		return carRepository.findAll();
+	public String getAllCars(ModelMap modelMap) {
+
+		cars = carRepository.findAll();
+		modelMap.addAttribute("cars", cars);
+		return "car";
 	}
 
-	@GetMapping(path = "/get/type")
-	public @ResponseBody Iterable<Car> getCarsByType() {
-		List<Car> cars = carRepository.findCarByType("family");
-		return cars;
+	@GetMapping(path = "/get", params = "sortMethod")
+	public String getAllCars(@RequestParam(defaultValue = "priceASC", required = false) String sortMethod,
+			ModelMap modelMap) {
+
+		String parameterOfSort = "";
+		String wayOfSort = "";
+		char c;
+
+		for (int i = 0; i < sortMethod.length(); i++) {
+			c = sortMethod.charAt(i);
+			if (c >= 64 && c <= 90)
+				wayOfSort += c;
+			else if (c >= 97 && c <= 122)
+				parameterOfSort += c;
+		}
+
+		Sort.Direction sortType = Sort.Direction.valueOf(wayOfSort);
+
+		cars = carRepository.findAll(Sort.by(sortType, parameterOfSort));
+		modelMap.addAttribute("cars", cars);
+		return "car";
 	}
 
-	@GetMapping(path = "/get/brand")
-	public @ResponseBody Iterable<Car> getCarsByBrand() {
-		List<Car> cars = carRepository.findCarByBrand("audi");
-		return cars;
+	@GetMapping(path = "/get", params = "type")
+	public String getCarsByType(@RequestParam String type, ModelMap modelMap) {
+
+		cars = carRepository.findCarByType(type);
+		modelMap.addAttribute("cars", cars);
+		return "car";
 	}
 
-	@GetMapping(path = "/get/model")
-	public @ResponseBody Iterable<Car> getCarsByModel() {
-		List<Car> cars = carRepository.findCarByModel("rs7");
-		return cars;
+	@GetMapping(path = "/get", params = "brand")
+	public String getCarsByBrand(@RequestParam String brand, ModelMap modelMap) {
+
+		cars = carRepository.findCarByBrand(brand);
+		modelMap.addAttribute("cars", cars);
+		return "car";
 	}
 
-	@GetMapping(path = "/get/price")
-	public @ResponseBody Iterable<Car> getCarsByPrice() {
-		List<Car> cars = carRepository.findCarByPrice(2200);
-		return cars;
+	@GetMapping(path = "/get", params = "model")
+	public String getCarsByModel(@RequestParam String model, ModelMap modelMap) {
+
+		cars = carRepository.findCarByModel(model);
+		modelMap.addAttribute("cars", cars);
+		return "car";
 	}
+
 }

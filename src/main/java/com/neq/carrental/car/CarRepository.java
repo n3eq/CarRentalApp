@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface CarRepository extends JpaRepository<Car, Integer> {
 
-	@Query(value = "SELECT c FROM Car c WHERE c.car_type = ?1")
+	@Query(value = "SELECT c FROM Car c WHERE c.carType = ?1")
 	List<Car> findCarByType(String type);
 
 	@Query(value = "SELECT c FROM Car c WHERE c.brand = ?1")
