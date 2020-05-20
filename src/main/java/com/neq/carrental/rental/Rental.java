@@ -1,5 +1,8 @@
 package com.neq.carrental.rental;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Basic;
@@ -12,12 +15,13 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Rental {
-
+		
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int rental_id;
-
+	
 	private int customer_id;
+	
 	private int car_id;
 
 	@Basic
@@ -30,6 +34,29 @@ public class Rental {
 
 	private String pickup_city;
 	private String return_city;
+	
+	public Rental()
+	{
+		
+	}
+	
+	public Rental(int customer_id, int car_id, String rental_start_date, String rental_finish_date,
+			String pickup_city, String return_city) throws ParseException {
+		
+		this.customer_id = customer_id;
+		this.car_id = car_id;
+		
+		DateFormat formatter;
+		Date date_start;
+		Date date_finish;
+		formatter = new SimpleDateFormat("yyyy-MM-dd");
+		date_start = formatter.parse(rental_start_date);
+		date_finish = formatter.parse(rental_finish_date);
+		this.rental_start_date = date_start;
+		this.rental_finish_date = date_finish;
+		this.pickup_city = pickup_city;
+		this.return_city = return_city;
+	}
 
 	public int getRental_id() {
 		return rental_id;
@@ -86,5 +113,5 @@ public class Rental {
 	public void setReturn_city(String return_city) {
 		this.return_city = return_city;
 	}
-
+	
 }

@@ -1,41 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+	<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	    pageEncoding="ISO-8859-1"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+	<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+	<%@ include file="header.jspf" %>
+	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Rent a car</title>
 </head>
 <body>
 	
 	
        
-     <form action="rentacar" method="get">
-     
+     <form action="saverental" method="get">
+     	
+     	<input type="hidden" id="carId" name="carId" value="${carId}">
+     	
      	<label for="start">Start date:</label>
 
-		<input type="date" id="start" name="rental-start"
+		<input type="date" id="start" name="rental_start"
       	 value="2020-12-31">
       
    		<br>
       
     	<label for="start">Finish date:</label>
 
-		<input type="date" id="finish" name="rental-finish"
+		<input type="date" id="finish" name="rental_finish"
        	value="2020-12-31">
      
 		<div class="form-group col-md-4">
-	      <label for="city-pickup">Pickup city:</label>
-	      <select name="city-pickup" id="city" class="form-control">
+	      <label for="city_pickup">Pickup city:</label>
+	      <select name="city_pickup" id="city" class="form-control">
 	        <option value="gdansk">Gdansk</option>
 	        <option value="krakow">Krakow</option>
 	        <option value="warszawa">Warszawa</option>
 	      </select>
 	      
-	      <label for="city-return">Return city:</label>
-	      <select name="city-return" id="city" class="form-control">
+	      <label for="city_return">Return city:</label>
+	      <select name="city_return" id="city" class="form-control">
 	        <option value="gdansk">Gdansk</option>
 	        <option value="krakow">Krakow</option>
 	        <option value="warszawa">Warszawa</option>

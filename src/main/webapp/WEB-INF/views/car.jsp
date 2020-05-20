@@ -1,20 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+	<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+	<%@ include file="header.jspf" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-	<link href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-	<script src="/webjars/jquery/1.9.1/jquery.min.js"></script>
-	<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	
-	<title>Insert title here</title>
+	<title>Our cars</title>
 </head>
 <body>
-	<ul class="nav navbar-nav navbar-right">
-			<li><a href="/logout">Logout</a></li>
-	</ul>
 
 	<form action="get" method="get">
 		<div class="form-group col-md-4">
@@ -73,7 +69,7 @@
 				<td>${car.brand}</td>
 				<td>${car.model}</td>
 				<td>${car.price}</td>
-				<td> <a class="btn btn-success" href="/rental/rentacar?id=1">Rent a car</a></td>
+				<td> <a class="btn btn-success" href="/rental/rentacar?id=${car.car_id}">Rent a car</a></td>
 			</tr>
 			
 			</c:forEach>

@@ -13,7 +13,7 @@ public class Car {
 	private int car_id;
 
 	private int office_id;
-	private String carType;
+	private String car_type;
 	private String brand;
 	private String model;
 	private int production_year;
@@ -86,11 +86,11 @@ public class Car {
 	}
 
 	public String getCarType() {
-		return carType;
+		return car_type;
 	}
 
 	public void setCarType(String carType) {
-		this.carType = carType;
+		this.car_type = carType;
 	}
 
 }
