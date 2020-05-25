@@ -1,9 +1,6 @@
 package com.neq.carrental.car;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.neq.carrental.office.CarOffice;
+
 @Controller
 @RequestMapping(path = "/cars")
 public class CarController {
@@ -19,7 +18,7 @@ public class CarController {
 	@Autowired
 	private CarRepository carRepository;
 
-	List<Car> cars;
+	Iterable<CarOffice> cars;
 
 	@PostMapping(path = "/add")
 	public @ResponseBody String addCar(@RequestParam int officeId, @RequestParam String type,
@@ -42,33 +41,16 @@ public class CarController {
 	}
 
 	@GetMapping(path = "/get")
-	public String getAllCars(ModelMap modelMap) {
-
-		cars = carRepository.findAll();
-		modelMap.addAttribute("cars", cars);
-		return "car";
-	}
-
-	@GetMapping(path = "/get", params = "sortMethod")
-	public String getAllCars(@RequestParam(defaultValue = "priceASC", required = false) String sortMethod,
-			ModelMap modelMap) {
-
-		String parameterOfSort = "";
-		String wayOfSort = "";
-		char c;
-
-		for (int i = 0; i < sortMethod.length(); i++) {
-			c = sortMethod.charAt(i);
-			if (c >= 64 && c <= 90)
-				wayOfSort += c;
-			else if (c >= 97 && c <= 122)
-				parameterOfSort += c;
-		}
-
-		Sort.Direction sortType = Sort.Direction.valueOf(wayOfSort);
-
-		cars = carRepository.findAll(Sort.by(sortType, parameterOfSort));
-		modelMap.addAttribute("cars", cars);
+	public String getCars(@RequestParam(defaultValue = "ASC", required = false) String sortMethod, ModelMap model) {
+		
+		if(sortMethod.equals("ASC"))
+			cars = carRepository.findCarOfficeByPriceAsc();
+		else
+			
+			cars = carRepository.findCarOfficeByPriceDesc();
+		
+		model.addAttribute("cars", cars);
+		
 		return "car";
 	}
 
@@ -92,6 +74,22 @@ public class CarController {
 	public String getCarsByModel(@RequestParam String model, ModelMap modelMap) {
 
 		cars = carRepository.findCarByModel(model);
+		modelMap.addAttribute("cars", cars);
+		return "car";
+	}
+	
+	@GetMapping(path = "/get", params = "year")
+	public String getCarsByYear(@RequestParam int year, ModelMap modelMap) {
+
+		cars = carRepository.findCarByYear(year);
+		modelMap.addAttribute("cars", cars);
+		return "car";
+	}
+	
+	@GetMapping(path = "/get", params = "city")
+	public String getCarsByCity(@RequestParam String city, ModelMap modelMap) {
+
+		cars = carRepository.findCarByCity(city);
 		modelMap.addAttribute("cars", cars);
 		return "car";
 	}

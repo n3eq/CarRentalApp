@@ -17,8 +17,8 @@
 	      <label for="inputState">Sort by</label>
 	      <select name="sortMethod" id="inputState" class="form-control">
 	        <option value="">Select sort method</option>
-	        <option value="priceDESC">price desc</option>
-	        <option value="priceASC">price asc</option>
+	        <option value="DESC">price desc</option>
+	        <option value="ASC">price asc</option>
 	      </select>
 	      <input type="submit" value="submit"/>
 	    </div>
@@ -39,10 +39,18 @@
 		    </form>
 		    
 		    <form action="get" method="get">
-		    			<label>Model:</label>
-		    			<input type="text" name="model"/>
+		    			<label>Year:&nbsp&nbsp&nbsp</label>
+		    			<input type="text" name="year"/>
 		    	 		<input type="submit" value="submit"/>
 		    </form>
+		    
+		    <form action="get" method="get">
+		    			<label>City:&nbsp&nbsp&nbsp</label>
+		    			<input type="text" name="city"/>
+		    	 		<input type="submit" value="submit"/>
+		    </form>
+		    
+		   <a class="btn btn-success" href="/cars/get">Reset</a>
     
     </div>
     
@@ -54,9 +62,13 @@
 			<tr>
 				<th>Car type</th>
 				<th>Brand</th>
-				<th>Model</th>
+				<th>Model</th>	
+				<th>Year</th>
+				<th>Horsepower</th>
+				<th>Seats</th>
 				<th>Price</th>
-				<th></th>
+				<th>Pickup city</th>
+				
 			</tr>
 		</thead>
 		
@@ -65,11 +77,17 @@
 			<c:forEach items="${cars}" var="car">
 		
 			<tr>
-				<td>${car.carType}</td>
+				<td>${car.car_type}</td>
 				<td>${car.brand}</td>
 				<td>${car.model}</td>
+				<td>${car.production_year}</td>
+				<td>${car.horsepower}</td>
+				<td>${car.seats}</td>
 				<td>${car.price}</td>
-				<td> <a class="btn btn-success" href="/rental/rentacar?id=${car.car_id}">Rent a car</a></td>
+				<td>${car.city}</td>
+				
+				
+				<td> <a class="btn btn-success" href="/rental/rentacar?id=${car.car_id}&city=${car.city}">Rent a car</a> </td>
 			</tr>
 			
 			</c:forEach>

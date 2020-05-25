@@ -9,4 +9,5 @@ public interface RentalRepository extends CrudRepository<Rental, Integer> {
 	
 	@Query(value = "SELECT r FROM Rental r WHERE r.customer_id = ?1")
 	public List<Rental> getRentalsByUserId(int userId);
+	
 }

@@ -30,7 +30,6 @@ public class MyUserDetails implements UserDetails{
 	public MyUserDetails(User user)
 	{
 		this.userId = user.getId();
-		System.out.println(this.userId);
 		this.userName = user.getUserName();
 		this.password = user.getPassword();
 		this.active = user.isActive();

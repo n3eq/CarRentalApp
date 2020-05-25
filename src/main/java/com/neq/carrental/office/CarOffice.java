@@ -1,26 +1,8 @@
-package com.neq.carrental.car;
+package com.neq.carrental.office;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
-public class Car {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int car_id;
+public class CarOffice {
 	
-	private int office_id;
-	private String car_type;
-	private String brand;
-	private String model;
-	private int production_year;
-	private short horsepower;
-	private byte seats;
-	private int price;
-
+	private int car_id;
 	public int getCar_id() {
 		return car_id;
 	}
@@ -35,6 +17,40 @@ public class Car {
 
 	public void setOffice_id(int office_id) {
 		this.office_id = office_id;
+	}
+
+	private int office_id;
+	private String car_type;
+	private String brand;
+	private String model;
+	private int production_year;
+	private short horsepower;
+	private byte seats;
+	private int price;
+	
+	private String city;
+
+	public CarOffice(int car_id, int office_id, String car_type, String brand, String model, int production_year, short horsepower, byte seats,
+			int price, String city) {
+		
+		this.car_id = car_id;
+		this.office_id = office_id;
+		this.car_type = car_type;
+		this.brand = brand;
+		this.model = model;
+		this.production_year = production_year;
+		this.horsepower = horsepower;
+		this.seats = seats;
+		this.price = price;
+		this.city = city;
+	}
+
+	public String getCar_type() {
+		return car_type;
+	}
+
+	public void setCar_type(String car_type) {
+		this.car_type = car_type;
 	}
 
 	public String getBrand() {
@@ -85,12 +101,13 @@ public class Car {
 		this.price = price;
 	}
 
-	public String getCarType() {
-		return car_type;
+	public String getCity() {
+		return city;
 	}
 
-	public void setCarType(String carType) {
-		this.car_type = carType;
+	public void setCity(String city) {
+		this.city = city;
 	}
-
+	
+	
 }
