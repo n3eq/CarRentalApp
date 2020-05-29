@@ -8,6 +8,10 @@ import org.springframework.data.repository.CrudRepository;
 public interface RentalRepository extends CrudRepository<Rental, Integer> {
 	
 	@Query(value = "SELECT r FROM Rental r WHERE r.customer_id = ?1")
-	public List<Rental> getRentalsByUserId(int userId);
+	List<Rental> getRentalsByUserId(int userId);
 	
+	@Query(value = "SELECT NEW com.neq.carrental.rental.CarAndRental"
+			+ "(c.brand, c.model, r.rental_start_date, r.rental_finish_date, r.pickup_city, r.return_city)"
+			+ "FROM Car c, Rental r WHERE r.car_id = c.car_id AND r.customer_id = ?1")
+	List<CarAndRental> getMyRentalsInfo(int userId);
 }

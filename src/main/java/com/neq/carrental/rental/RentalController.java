@@ -1,6 +1,7 @@
 package com.neq.carrental.rental;
 
 import java.text.ParseException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -28,6 +29,7 @@ public class RentalController {
 	@Autowired
 	private CarRepository carRepository;
 	
+	// only ADMIN access
 	@GetMapping(path = "/get")
 	@ResponseBody
 	public Iterable<Rental> getRental() {
@@ -40,7 +42,9 @@ public class RentalController {
 		Authentication authentication = userAuthentication.getAuthentication();
 		MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
 		
-		Iterable<Rental> rentals = rentalRepository.getRentalsByUserId(userDetails.getUserId());
+		//Iterable<Rental> rentals = rentalRepository.getRentalsByUserId(userDetails.getUserId());
+		
+		List<CarAndRental> rentals = rentalRepository.getMyRentalsInfo(userDetails.getUserId());
 		
 		model.addAttribute("rentals", rentals);
 		
@@ -62,6 +66,8 @@ public class RentalController {
 		
 		Authentication authentication = userAuthentication.getAuthentication();
 		MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
+		
+		carRepository.setCarAvaliable(carId);
 		
 		String city_pickup = carRepository.findCarByCarId(carId).getCity();
 		

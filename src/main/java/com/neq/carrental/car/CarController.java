@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.neq.carrental.office.CarOffice;
 
@@ -18,28 +16,8 @@ public class CarController {
 	@Autowired
 	private CarRepository carRepository;
 
-	Iterable<CarOffice> cars;
-
-	@PostMapping(path = "/add")
-	public @ResponseBody String addCar(@RequestParam int officeId, @RequestParam String type,
-			@RequestParam String brand, @RequestParam String model, @RequestParam int price, @RequestParam short year,
-			@RequestParam short horsepower, @RequestParam byte seats) {
-
-		Car c = new Car();
-		c.setOffice_id(officeId);
-		c.setCarType(type);
-		c.setBrand(brand);
-		c.setModel(model);
-		c.setProduction_year(year);
-		c.setHorsepower(horsepower);
-		c.setSeats(seats);
-		c.setPrice(price);
-
-		carRepository.save(c);
-
-		return "Saved";
-	}
-
+	private Iterable<CarOffice> cars;
+	
 	@GetMapping(path = "/get")
 	public String getCars(@RequestParam(defaultValue = "ASC", required = false) String sortMethod, ModelMap model) {
 		

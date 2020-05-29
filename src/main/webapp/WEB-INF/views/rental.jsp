@@ -30,8 +30,12 @@
 		<input type="date" id="finish" name="rental_finish"
        	value="2020-12-31">
      
+     	<br>
+     
 	 	<label for="city_pickup">Pickup city:</label>
 	 	<input type="text" value="${city}" name="city_pickup" disabled>
+	 		     
+	 	<br>
 	 		     
 	      <label for="city_return">Return city:</label>
 	      <select name="city_return" id="city" class="form-control">
@@ -40,9 +44,8 @@
 	        <option value="warszawa">Warszawa</option>
 	      </select>
 	      
-	      <input type="submit" value="submit"/>
-	   
-	    
+	     <input type="submit" value="submit"/>
+	 
     </form>
 	
 	<script>

@@ -18,6 +18,8 @@
 	
 		<thead>
 			<tr>
+				<th>Brand</th>
+				<th>Model</th>
 				<th>Rental start date</th>
 				<th>Rental finish date</th>
 				<th>Pickup city</th>
@@ -30,6 +32,8 @@
 			<c:forEach items="${rentals}" var="r">
 		
 			<tr>
+				<td>${r.brand}</td>
+				<td>${r.model}</td>
 				<td>${r.rental_start_date}</td>
 				<td>${r.rental_finish_date}</td>
 				<td>${r.pickup_city}</td>

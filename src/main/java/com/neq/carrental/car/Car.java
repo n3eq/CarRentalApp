@@ -20,6 +20,34 @@ public class Car {
 	private short horsepower;
 	private byte seats;
 	private int price;
+	private byte avaliable;
+
+	public Car()
+	{
+		
+	}
+	
+	public Car(int office_id, String car_type, String brand, String model, int production_year, short horsepower,
+			byte seats, int price, byte avaliable) {
+		
+		this.office_id = office_id;
+		this.car_type = car_type;
+		this.brand = brand;
+		this.model = model;
+		this.production_year = production_year;
+		this.horsepower = horsepower;
+		this.seats = seats;
+		this.price = price;
+		this.avaliable = avaliable;
+	}
+
+	public byte getAvaliable() {
+		return avaliable;
+	}
+
+	public void setAvaliable(byte avaliable) {
+		this.avaliable = avaliable;
+	}
 
 	public int getCar_id() {
 		return car_id;

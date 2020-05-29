@@ -2,7 +2,10 @@ package com.neq.carrental.car;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.neq.carrental.office.CarOffice;
@@ -41,13 +44,17 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
 
 	@Query(value = "SELECT NEW com.neq.carrental.office.CarOffice"
 			+ "(c.car_id, c.office_id, c.car_type, c.brand, c.model, c.production_year, c.horsepower, c.seats, c.price, o.city)"
-			+ "FROM Office o, Car c WHERE c.office_id = o.office_id ORDER BY c.price ASC")
+			+ "FROM Office o, Car c WHERE c.office_id = o.office_id AND c.avaliable > 0 ORDER BY c.price ASC")
 	List<CarOffice> findCarOfficeByPriceAsc();
 	
 	@Query(value = "SELECT NEW com.neq.carrental.office.CarOffice"
 			+ "(c.car_id, c.office_id, c.car_type, c.brand, c.model, c.production_year, c.horsepower, c.seats, c.price, o.city)"
-			+ "FROM Office o, Car c WHERE c.office_id = o.office_id ORDER BY c.price DESC")
+			+ "FROM Office o, Car c WHERE c.office_id = o.office_id AND c.avaliable > 0 ORDER BY c.price DESC")
 	List<CarOffice> findCarOfficeByPriceDesc();
 	
+	@Modifying
+	@Transactional
+	@Query(value = "UPDATE car SET car.avaliable = car.avaliable - 1 WHERE car.car_id = ?1", nativeQuery = true)
+	void setCarAvaliable(int carId);
 	
 }
