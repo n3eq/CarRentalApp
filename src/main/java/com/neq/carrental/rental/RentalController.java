@@ -41,9 +41,7 @@ public class RentalController {
 	{
 		Authentication authentication = userAuthentication.getAuthentication();
 		MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
-		
-		//Iterable<Rental> rentals = rentalRepository.getRentalsByUserId(userDetails.getUserId());
-		
+			
 		List<CarAndRental> rentals = rentalRepository.getMyRentalsInfo(userDetails.getUserId());
 		
 		model.addAttribute("rentals", rentals);
@@ -67,6 +65,13 @@ public class RentalController {
 		Authentication authentication = userAuthentication.getAuthentication();
 		MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
 		
+		if(rentalRepository.getAmountOfRentalsByUserId(myUserDetails.getUserId()) > 2)
+		{
+			System.out.println("alert - nie mozna wypozyczyc wiecej niz 2 samochody naraz na jednego klienta");
+			return "redirect:/cars/get";
+		}
+			
+		
 		carRepository.setCarAvaliable(carId);
 		
 		String city_pickup = carRepository.findCarByCarId(carId).getCity();
@@ -75,5 +80,13 @@ public class RentalController {
 		rentalRepository.save(rent);
 
 		return "redirect:/cars/get";
+	}
+	
+	@GetMapping(path = "/cancel")
+	public String cancelRent(@RequestParam int carId){
+		
+		rentalRepository.deleteRentalById(carId);
+		
+		return "redirect:/rental/myrentals";
 	}
 }

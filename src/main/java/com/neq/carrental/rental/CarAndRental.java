@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class CarAndRental {
 	
+	private int car_id;
 	private String brand;
 	private String model;
 
@@ -14,11 +15,10 @@ public class CarAndRental {
 	private String pickup_city;
 	private String return_city;
 	
-	
-	
-	public CarAndRental(String brand, String model, Date rental_start_date, Date rental_finish_date,
+	public CarAndRental(int car_id, String brand, String model, Date rental_start_date, Date rental_finish_date,
 			String pickup_city, String return_city) {
 		
+		this.car_id = car_id;
 		this.brand = brand;
 		this.model = model;
 		this.rental_start_date = rental_start_date;
@@ -26,6 +26,15 @@ public class CarAndRental {
 		this.pickup_city = pickup_city;
 		this.return_city = return_city;
 	}
+	
+	public int getCar_id() {
+		return car_id;
+	}
+
+	public void setCar_id(int car_id) {
+		this.car_id = car_id;
+	}
+
 	public String getBrand() {
 		return brand;
 	}

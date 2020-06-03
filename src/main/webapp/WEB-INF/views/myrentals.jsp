@@ -24,6 +24,7 @@
 				<th>Rental finish date</th>
 				<th>Pickup city</th>
 				<th>Return city</th>
+				<th></th>
 			</tr>
 		</thead>
 		
@@ -38,6 +39,7 @@
 				<td>${r.rental_finish_date}</td>
 				<td>${r.pickup_city}</td>
 				<td>${r.return_city}</td>
+				<td><a class="btn btn-danger" href="/rental/cancel?carId=${r.car_id}">Cancel</a></td>
 			</tr>
 			
 			</c:forEach>
