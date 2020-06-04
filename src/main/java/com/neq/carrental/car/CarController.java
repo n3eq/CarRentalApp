@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.neq.carrental.office.CarOffice;
 
+/**
+ * klasa kontrolera odbierająca zapytania użytkownika
+ * i wysyłająca odpowiedzi na dane żądanie - związane z samochodami
+ */
 @Controller
 @RequestMapping(path = "/cars")
 public class CarController {
@@ -18,6 +22,10 @@ public class CarController {
 
 	private Iterable<CarOffice> cars;
 	
+	/**
+	 * @param sortMethod parametr określający jaka metoda ma być zastosowana do sortowania danych o samochodach
+	 * @return strona jsp "car" listująca samochody dostępne w bazie
+	 */
 	@GetMapping(path = "/get")
 	public String getCars(@RequestParam(defaultValue = "ASC", required = false) String sortMethod, ModelMap model) {
 		
@@ -32,6 +40,12 @@ public class CarController {
 		return "car";
 	}
 
+	/**
+	 * 
+	 * @param type parametr określający jaki typ samochodu ma zostać odnaleziony w bazie
+	 * @param modelMap
+	 * @return  strona jsp "car" listująca samochody dostępne w bazie
+	 */
 	@GetMapping(path = "/get", params = "type")
 	public String getCarsByType(@RequestParam String type, ModelMap modelMap) {
 
@@ -40,6 +54,11 @@ public class CarController {
 		return "car";
 	}
 
+	/**
+	 * 
+	 * @param brand parametr określający jaka marka samochodu ma zostać odnaleziona w bazie 
+	 * @return strona jsp "car" listująca samochody dostępne w bazie
+	 */
 	@GetMapping(path = "/get", params = "brand")
 	public String getCarsByBrand(@RequestParam String brand, ModelMap modelMap) {
 
@@ -47,7 +66,12 @@ public class CarController {
 		modelMap.addAttribute("cars", cars);
 		return "car";
 	}
-
+	
+	/**
+	 * 
+	 * @param model parametr określający jaki model samochodu ma zostać odnaleziony w bazie
+	 * @return strona jsp "car" listująca samochody dostępne w bazie 
+	 */
 	@GetMapping(path = "/get", params = "model")
 	public String getCarsByModel(@RequestParam String model, ModelMap modelMap) {
 
@@ -56,6 +80,11 @@ public class CarController {
 		return "car";
 	}
 	
+	/**
+	 * 
+	 * @param year parametr określający jaki rok produkcji samochodu ma zostać odnaleziony w bazie
+	 * @return strona jsp "car" listująca samochody dostępne w bazie
+	 */
 	@GetMapping(path = "/get", params = "year")
 	public String getCarsByYear(@RequestParam int year, ModelMap modelMap) {
 
@@ -64,6 +93,11 @@ public class CarController {
 		return "car";
 	}
 	
+	/**
+	 * 
+	 * @param city parametr określający z jakiego miasta ma pochodzić samochód 
+	 * @return strona jsp "car" listująca samochody dostępne w bazie
+	 */
 	@GetMapping(path = "/get", params = "city")
 	public String getCarsByCity(@RequestParam String city, ModelMap modelMap) {
 

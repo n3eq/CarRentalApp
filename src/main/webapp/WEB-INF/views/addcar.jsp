@@ -13,10 +13,10 @@
 	
 	<form:form action="/admin/addcar" method="POST" modelAttribute="car">
 	
-	  <fieldset class="form-group">
+	  <!-- <fieldset class="form-group">
 	    <form:label path="car_id">Car id</form:label>
 	    <form:input path="car_id" type="text" class="form-control" placeholder="e.g 1...9999"/>
-	  </fieldset>
+	  </fieldset> -->
 	
 	 <fieldset class="form-group">
 	    <form:label path="office_id">Office id(1-krakow, 2-warszawa, 3-gdansk)</form:label>

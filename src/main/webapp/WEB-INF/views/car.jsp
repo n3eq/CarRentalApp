@@ -11,7 +11,9 @@
 	<title>Our cars</title>
 </head>
 <body>
-
+	
+	<b><%= request.getParameter("alert") %></b>
+	
 	<form action="get" method="get">
 		<div class="form-group col-md-4">
 	      <label for="inputState">Sort by</label>

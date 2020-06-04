@@ -20,7 +20,7 @@ public class Rental {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int rental_id;
 	
-	private int customer_id;
+	private int user_id;
 	
 	private int car_id;
 
@@ -40,10 +40,10 @@ public class Rental {
 		
 	}
 	
-	public Rental(int customer_id, int car_id, String rental_start_date, String rental_finish_date,
+	public Rental(int user_id, int car_id, String rental_start_date, String rental_finish_date,
 			String pickup_city, String return_city) throws ParseException {
 		
-		this.customer_id = customer_id;
+		this.user_id = user_id;
 		this.car_id = car_id;
 		
 		DateFormat formatter;
@@ -67,11 +67,11 @@ public class Rental {
 	}
 
 	public int getCustomer_id() {
-		return customer_id;
+		return user_id;
 	}
 
 	public void setCustomer_id(int customer_id) {
-		this.customer_id = customer_id;
+		this.user_id = customer_id;
 	}
 
 	public int getCar_id() {

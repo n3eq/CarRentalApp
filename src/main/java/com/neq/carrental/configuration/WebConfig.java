@@ -14,7 +14,11 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @ComponentScan("com.neq.carrental")
 public class WebConfig implements WebMvcConfigurer {
-
+	
+	/**
+	 * metoda określająca typ wykorzytywanego narzędzia dla widoków aplikacji
+	 * @return obiekt klasy InternalResourceViewResolver
+	 */
 	@Bean
 	public ViewResolver setupInternalResourceViewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();

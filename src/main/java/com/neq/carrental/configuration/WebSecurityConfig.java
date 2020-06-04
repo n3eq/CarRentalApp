@@ -18,14 +18,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	UserDetailsService userDetailsService;
 	
-	// Authentication
+	/**
+	 * metoda konfigurująca sposób autentykacji użytkownika
+	 * @param auth
+	 * @throws Exception
+	 */
 	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
 		
 		auth.userDetailsService(userDetailsService);
 	}
 
-	// Authorization
+	/**
+	 * metoda ustawiająca dostęp poszczególnym użytkowniką do podstron aplikacji
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()

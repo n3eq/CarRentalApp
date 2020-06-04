@@ -10,6 +10,10 @@
 </head>
 <body>
 	
+	<b><%= request.getParameter("alert") %></b>
+	
+	<br>
+	
 	<b>Click the button to add a new car.</b>
 	<a class="btn btn-success" href="/admin/addcar">Add car</a>
 	

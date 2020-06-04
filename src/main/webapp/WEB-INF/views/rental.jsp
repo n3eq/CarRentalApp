@@ -11,9 +11,7 @@
 <title>Rent a car</title>
 </head>
 <body>
-	
-	
-       
+	 
      <form action="saverental" method="get">
      	
      	<input type="hidden" id="carId" name="carId" value="${carId}">
